@@ -133,6 +133,8 @@ dmypy.json
 cellquant/logs/
 logs/
 settings.json
+llm_config.json
+.cellquant/
 cellquant/settings.json
 cellquant/key/
 *_structure_chan*_cell*_time*.csv
