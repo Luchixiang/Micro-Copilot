@@ -1,6 +1,6 @@
 # Micro-copilot
 
-Micro-copilot is a research software platform for fluorescence microscopy. It combines adaptive microscope acquisition, cell segmentation, lysosome and puncta quantification, channel co-localization, and optional large-language-model-assisted analysis in one desktop interface.
+Micro-copilot is a research software platform for agentic fluorescence microscopy. It combines adaptive microscope acquisition, cell segmentation, lysosome and puncta quantification, channel co-localization, and optional large-language-model-assisted analysis in one desktop interface.
 
 ![Human-in-the-loop agentic microscopy research framework](images/Main_framework.png)
 
@@ -10,20 +10,18 @@ Micro-copilot is a research software platform for fluorescence microscopy. It co
 
 *The graphical interface brings Smart Imaging, Real-Time Analysis, and Co-Scientist functions into one workspace.*
 
-[![Watch the Micro-copilot demonstration on YouTube](https://img.youtube.com/vi/gY-msnV3gRY/maxresdefault.jpg)](https://youtu.be/gY-msnV3gRY)
-
 [Watch the Micro-copilot demonstration on YouTube](https://youtu.be/gY-msnV3gRY)
 
 The internal Python package retains the historical name `cellquant` for compatibility.
 
 ## Software capabilities
 
-| Component | Current function |
-| --- | --- |
-| Smart Imaging | Uses cell-segmentation feedback and a reward-based navigation policy to identify fields of view and center cells during supported microscope acquisition. |
-| Real-Time Analysis | Segments cells, detects lysosomes or puncta, measures per-cell organelle properties, and calculates directional co-localization between selected channels. |
-| LLM-customized analysis | Converts a natural-language analysis request into a reusable Python script or FIJI/ImageJ macro for user-defined 2D measurements. |
-| Co-Scientist interface | Reads quantitative experiment outputs and supports researcher-guided interpretation and hypothesis development. |
+| Component               | Current function                                                                                                                                           |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Smart Imaging           | Uses cell-segmentation feedback and a reward-based navigation policy to identify fields of view and center cells during supported microscope acquisition.  |
+| Real-Time Analysis      | Segments cells, detects lysosomes or puncta, measures per-cell organelle properties, and calculates directional co-localization between selected channels. |
+| LLM-customized analysis | Converts a natural-language analysis request into a reusable Python script or FIJI/ImageJ macro for user-defined 2D measurements.                          |
+| Co-Scientist interface  | Reads quantitative experiment outputs and supports researcher-guided interpretation and hypothesis development.                                            |
 
 The bundled lysosome pipeline proposes candidates with Laplacian-of-Gaussian blob detection, removes false positives and merges ring-like detections with a trained classifier, and refines detected regions locally. Co-localization is calculated from the surface-to-surface distance between structures using a k-d tree search.
 
@@ -63,11 +61,10 @@ python -m cellquant
 
 ## Image analysis
 
-The primary offline workflow is simple: drag a microscopy image into the window, select the analysis channels, and click **Run**.
+The primary offline workflow is simple: drag a microscopy image into the window, select the analysis channels, and click **Run**. Note that current segmentation model is trained for super-resolution (60 x; 100 x fluorscence microscopy image).
 
 ### Current analysis limitations
 
-> [!IMPORTANT]
 > - **4D images are not supported.** The current analysis workflow is intended for 2D images with up to four channels. Multichannel 3D stacks and time-lapse datasets are not processed volume-by-volume or slice-by-slice.
 > - **Language mode and the built-in lysosome workflow are separate modes.** Enabling **Use language** disables the fixed-selector, built-in lysosome workflow. Leave **Use language** unchecked for the bundled lysosome analysis.
 > - **LLM integration currently supports Azure OpenAI only.** Direct OpenAI API and Anthropic Claude API support are planned for future releases.
@@ -129,23 +126,23 @@ Microscope control requires a compatible Micro-Manager configuration and must be
 
 Analysis outputs are written beside the input image unless noted otherwise.
 
-| Output | Description |
-| --- | --- |
-| `*_analysis_cell_seg.png` | Cell-segmentation overlay for visual review. |
-| `*_analysis_cell_mask.npy` | Labeled cell mask used for analysis. |
+| Output                              | Description                                                                                        |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `*_analysis_cell_seg.png`           | Cell-segmentation overlay for visual review.                                                       |
+| `*_analysis_cell_mask.npy`          | Labeled cell mask used for analysis.                                                               |
 | `*_structure_chan*_cell*_time*.csv` | Per-punctum position, pixel count, intensity, nuclear distance, and channel co-localization flags. |
-| `*_colocalization.csv` | Per-cell directional co-localization counts, ratios, intensities, and distance threshold. |
-| `*structure_chan*.png` | Puncta detection preview for each analyzed channel. |
-| `*_<object>_chan*_llm_seg.png` | Preview generated by an LLM-customized analysis. |
-| `*_<object>_chan*_cell*_time*.csv` | Per-cell measurements from an LLM-customized analysis. |
-| `llm_custom_analysis/` | Cached generated Python scripts or FIJI macros and their metadata. |
-| `llm_custom_analysis_outputs/` | Intermediate inputs and masks produced by custom analysis. |
+| `*_colocalization.csv`              | Per-cell directional co-localization counts, ratios, intensities, and distance threshold.          |
+| `*structure_chan*.png`              | Puncta detection preview for each analyzed channel.                                                |
+| `*_<object>_chan*_llm_seg.png`      | Preview generated by an LLM-customized analysis.                                                   |
+| `*_<object>_chan*_cell*_time*.csv`  | Per-cell measurements from an LLM-customized analysis.                                             |
+| `llm_custom_analysis/`              | Cached generated Python scripts or FIJI macros and their metadata.                                 |
+| `llm_custom_analysis_outputs/`      | Intermediate inputs and masks produced by custom analysis.                                         |
 
 ## Bundled models
 
 The default model files are included in `cellquant/weights/`:
 
-- `model_0528_resize` is the cell-segmentation model shown in the GUI as **Micro-copilot (bundled)**. Its saved 170.89-pixel diameter is loaded automatically.
+- `model_0528_resize` is the cell-segmentation model shown in the GUI as **Micro-copilot (bundled)**.  Its saved 170.89-pixel diameter is loaded automatically.
 - `model.pth` is the puncta classifier used to distinguish true detections, false positives, and ring-like structures.
 
 The following environment variables override the bundled weights:
