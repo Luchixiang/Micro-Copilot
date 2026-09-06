@@ -1,0 +1,5 @@
+recursive-include cellquant/logo *.png *.ico
+recursive-include cellquant/weights *
+recursive-include cellquant/gui *.html
+include README.md
+include LICENSE
