@@ -163,7 +163,7 @@ python -m pip install ".[test]"
 python -m pytest -q
 ```
 
-The current release passed the 2D drag-and-run GUI smoke test, the bundled segmentation and puncta-model checks, two-channel co-localization export tests, and the local automated suite. See the [publish-readiness report](PUBLISH_READINESS_REPORT.md) for detailed results and remaining risks.
+The current release passed the 2D drag-and-run GUI smoke test, the bundled segmentation and puncta-model checks, two-channel co-localization export tests, and the local automated suite.
 
 ## Citation and attribution
 
