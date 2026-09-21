@@ -1742,7 +1742,7 @@ Requirements:
 
             for i, ((y, x), r2) in enumerate(zip(coords2, radii2)):
                 # Find potential candidates
-                candidates = tree.query_ball_point((y, x), r2 + max_radius_set1)
+                candidates = tree.query_ball_point((y, x), r2 + max_radius_set1 + max(0., distance_threshold))
                 min_surface_distance = float('inf')
                 for index in candidates:
                     y2, x2 = coords1[index]
