@@ -82,7 +82,7 @@ The built-in workflow is the recommended starting point for a 2D fluorescence im
 
 Micro-copilot segments the cells, performs puncta analysis, restores the cell mask in the display, and writes the results beside the input image. Selecting two or more puncta channels produces both directional co-localization comparisons.
 
-![Segmentation and analysis settings](images/analysis_setting_gui.png)
+![Segmentation and analysis settings](images/supp_analysis.png)
 
 [Open the high-resolution analysis-panel figure](images/analysis_setting_gui.pdf)
 
@@ -116,7 +116,7 @@ Do not store credentials in the repository. GUI settings are written outside the
 
 Smart Imaging uses Micro-Manager through Pycro-Manager to configure channels, exposure times, time-lapse acquisition, Z acquisition, output paths, and the target number of cells. Cell-segmentation feedback guides stage navigation and field selection during acquisition.
 
-![Smart Imaging configuration](images/imaging_setting_gui.png)
+![Smart Imaging configuration](images/analysis_setting_gui.png)
 
 [Open the high-resolution Smart Imaging figure](images/imaging_setting_gui.pdf)
 
