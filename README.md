@@ -27,7 +27,18 @@ The bundled lysosome pipeline proposes candidates with Laplacian-of-Gaussian blo
 
 ## Installation
 
-Micro-copilot requires Python 3.9 or newer. Create and activate a virtual environment, then install the desktop application from the project directory:
+Micro-copilot requires Python 3.9 or newer and Git LFS. Install and initialize Git LFS before cloning so that the bundled model weights are downloaded instead of their small pointer files:
+
+```bash
+git lfs install
+git clone https://github.com/Luchixiang/Micro-Copilot.git
+cd Micro-Copilot
+git lfs pull
+```
+
+If the repository was cloned before Git LFS was installed, run `git lfs install` followed by `git lfs pull` inside the repository.
+
+Create and activate a virtual environment, then install the desktop application from the project directory:
 
 ```bash
 python -m pip install ".[gui]"
@@ -41,7 +52,9 @@ python -m pip install ".[llm]"         # Azure OpenAI analysis features
 python -m pip install ".[image]"       # Additional ND2 and NRRD image readers
 ```
 
-The bundled model weights are tracked with Git LFS. Install Git LFS before cloning or committing the repository so that the complete model files are available.
+After a successful Git LFS download, Micro-copilot automatically loads the bundled cell-segmentation model from `cellquant/weights/model_0528_resize` and the puncta classifier from `cellquant/weights/model.pth`. Users do not need to edit either model path. The `CELLQUANT_CELLPOSE_MODEL` and `CELLQUANT_PUNCTA_MODEL` environment variables are optional overrides.
+
+Cloning with Git is recommended. GitHub source ZIP archives may contain only Git LFS pointer files rather than the actual model weights, depending on the repository archive settings.
 
 ## Starting the application
 
